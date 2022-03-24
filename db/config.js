@@ -1,5 +1,5 @@
-
 const mysql = require('mysql');
+
 const db_info = mysql.createConnection({
     host : 'localhost',
     user : 'root',
@@ -7,9 +7,22 @@ const db_info = mysql.createConnection({
     password : '0000',
     database : 'ddibu-db'
 });
-const db = mysql.createConnection(db_info);
 
-db.connect();
-module.exports = db;
+const db_connect = {
+    init : () => {
+        const db = mysql.createConnection(db_info);
+        return db
+    },
+    opne : (con) => {
+        con.connect( (err) => {
+            if(err){
+                console.log(err)
+            }
+            else{
+                console.log("mysql is connected!")
+            }
+        });
+    }
+}
 
-connection.end();
+module.exports = db_connect;
