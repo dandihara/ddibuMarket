@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const router = require('./router')
+const router = require('./controller/user_controller')
 const app = express();
 // 로그인 , 거래내역, 마이페이지
 //json 이용하기 위한 코드 추가 > ver 4.16이상부터 사용 가능.
