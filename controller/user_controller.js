@@ -1,7 +1,5 @@
-const mysql = require('mysql');
-const db_connect = require('../db/config');
-const db =require("../db/config");
 const table = 'users';
+const user = require('../model/user')
 
 var user_id = 1;
 // const conn = db_connect.init;
@@ -27,5 +25,22 @@ module.exports = {
                 }
             });
         });
+    },
+
+    register : (conn,body) => {
+        return new Promise((resolve,reject) => {
+            body = user.vaild(body)
+            conn.query(`insert into users (id,password,nickname) values (${body.id},${body.password},${body.nickname})`,
+                (err,result,fields) => {
+                    if (err){
+                        reject(err)
+                    } else{
+                        resolve(result);
+
+                    }
+                }
+            )
+        });
     }
+    
 }
